@@ -18,7 +18,7 @@ function NavBar() {
                     <MenuIcon />
                 </div>
             </div>
-            <img src={logo} alt="Miswag Logo" className="w-28 pt-1 md:pt-0 md:w-40  md:ml-20" />
+            <img src={logo} alt="Miswag Logo" className="w-28 pt-1 md:pt-0 md:w-40  md:ml-16" />
 
             <div className="hidden md:flex space-x-7 mr-20">
                 {navItems.map(item => (
