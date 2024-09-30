@@ -29,7 +29,8 @@ function Card() {
                         <img
                             src={data.image}
                             alt={data.name}
-                            className='object-cover h-32 md:h-48 w-full rounded-xl '
+                            className='object-cover h-32 md:h-48 w-full rounded-xl'
+                            loading="lazy"
                         />
                         <h1 className='font-bold text-lg mt-2'>{data.name}</h1>
                         <p className='text-sm md:text-base mt-2 line-clamp-3'>{data.description}</p>
