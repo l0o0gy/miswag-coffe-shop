@@ -4,6 +4,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { Link } from 'react-router-dom';
+
+
 
 function Card() {
     const [miswagData, setMiswagData] = useState([]);
@@ -26,11 +31,11 @@ function Card() {
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4'>
                 {miswagData.length > 0 && miswagData.map((data) => (
                     <div key={data.id} className='bg-orange-50 p-3 h-auto rounded-xl shadow-lg flex flex-col'>
-                        <img
+                        < LazyLoadImage
+                            loading='lazy'
                             src={data.image}
                             alt={data.name}
                             className='object-cover h-32 md:h-48 w-full rounded-xl'
-                            loading="lazy"
                         />
                         <h1 className='font-bold text-lg mt-2'>{data.name}</h1>
                         <p className='text-sm md:text-base mt-2 line-clamp-3'>{data.description}</p>
@@ -39,6 +44,8 @@ function Card() {
                             <div className="grid grid-cols-1 md:grid-cols-2 items-center pt-4">
                                 <p className='font-semibold text-base md:text-lg'>${data.price}</p>
                                 <div className='flex space-x-2'>
+                                <Link to={`/miswagcoffee/${data.id}/${data.name}`} state={{ data}} style={{ textDecoration: 'none'}}>
+
                                     <Button
                                         variant="contained"
                                         sx={{
@@ -48,12 +55,13 @@ function Card() {
                                             },
                                             fontSize: { xs: 7, md: 13 },
                                             borderRadius: 2,
-                                            width: { xs: '250px', md: '400px' },
+                                            width: { xs: '90px', md: 'auto' },
                                             height: { xs: '30px', md: 'auto' },
                                         }}
                                     >
                                         More Details
                                     </Button>
+                                </Link>
                                     <Box sx={{
                                         padding: 1,
                                         borderRadius: 20,
