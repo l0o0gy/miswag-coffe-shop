@@ -8,7 +8,7 @@ function HeroSection() {
     useEffect(() => {
         const fetchCoffeeShopData = async () => {
             try {
-                const response = await axios.get('https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json');
+                const response = await axios.get(' https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1727798400000&signature=_Xa6tjjGuvojI_857kdprrMl3vSKDsWL-Ko9Dux5Vl4&downloadName=coffee.json');
                 setMiswagData(response.data);
                 console.log(response.data); 
             } catch (err) {
