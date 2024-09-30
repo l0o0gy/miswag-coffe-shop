@@ -6,12 +6,12 @@ function CoffeeDetails() {
     const { data } = location.state || {};
 
     return (
-        <div className="md:flex  md:justify-start m-5 md:p-5 mt-0 md:m-16 ">
+        <div className="md:flex  md:justify-start m-5 mt-0 md:p-5 md:mt-0 md:m-16 ">
             <img
                 src={data.image}
                 alt={data.name}
                 loading="lazy"
-                className="object-cover rounded-lg  w-full h-72 md:w-6/12 md:max-h-96 "
+                className="object-cover rounded-lg  w-full h-72 md:w-6/12 md:h-96 "
             />
             <div className=" md:pl-10 pt-5 md:pt-0">
                 <h1 className='font-bold text-2xl md:text-5xl text-amber-900 '>{data.name}</h1>
