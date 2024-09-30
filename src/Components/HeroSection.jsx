@@ -1,35 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 function HeroSection() {
-    const [miswagData, setMiswagData] = useState([]); 
-    const [error, setError] = useState(null); 
 
-    useEffect(() => {
-        const fetchCoffeeShopData = async () => {
-            try {
-                const response = await axios.get(' https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1727798400000&signature=_Xa6tjjGuvojI_857kdprrMl3vSKDsWL-Ko9Dux5Vl4&downloadName=coffee.json');
-                setMiswagData(response.data);
-                console.log(response.data); 
-            } catch (err) {
-                setError(err); 
-                console.error(err);
-            }
-        };
-
-        fetchCoffeeShopData();
-    }, []);
 
     return (
         <div>
-            <div className='bg-slate-400 rounded-xl h-72 ml-20 mr-20 flex overflow-x-auto'> 
-                {miswagData.length > 0 && miswagData.map((data) => (
-                    <img 
-                        key={data.id}
-                        src={data.image} 
-                        alt={data.name}
-                    />
-                ))}
+            <div 
+                className='object-cover ml-5 mr-5 h-60 rounded-xl md:h-80 md:ml-20 md:mr-20 flex overflow-x-hidden items-center relative ' 
+            >
+                <img src='https://pixabay.com/get/g802e1915ccc17ebeb60e689c6eb6748db7026f7670b7d00be71ab99cf3f0358d3f8fedd572712a03608807a4991aaa68f1c82b8375f8442c6059a0f8166b3c5f_1280.jpg'
+                className="h-full w-full object-cover"
+                />
             </div>
         </div>
     );
