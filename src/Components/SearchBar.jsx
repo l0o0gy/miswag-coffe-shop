@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Search from '../assets/img/searching.png';
 
-
-export default function SearchBar() {
+export default function SearchBar({ value, onChange }) {
     return (
         <div>
             <div className='flex justify-start border rounded-xl p-2 w-72'>
@@ -10,11 +9,11 @@ export default function SearchBar() {
                 <input
                     type="text"
                     placeholder='Search...'
-                    // value={searchCoffee}
-                    // onChange={handleInputChange}
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)} 
+                    className='outline-none'
                 />
             </div>
         </div>
-    )
+    );
 }
-

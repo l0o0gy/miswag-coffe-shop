@@ -8,7 +8,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import { useDebounce } from '../CustomerHooksuseDebounce/hook';
+import { useDebounce } from '../Hooks/hook';
+import searchlogo from '../assets/img/transparency.png';
+import searchcup from '../assets/img/searchcup.png';
 
 function Card() {
     const [miswagData, setMiswagData] = useState([]);
@@ -49,13 +51,16 @@ function Card() {
     useEffect(() => {
         const loadNameOfItem = async () => {
             setLoading(true);
-            const data = await fetchCoffeeShopData(debouncedSearch);
-            setMiswagData(data.filter(item => item.name.toLowerCase().includes(debouncedSearch.toLowerCase())));
+            const data = await fetchCoffeeShopData();
+            const filteredData = data.filter(item => item.name.toLowerCase().includes(debouncedSearch.toLowerCase()));
+            setMiswagData(filteredData);
             setLoading(false);
         };
 
         if (debouncedSearch) {
             loadNameOfItem();
+        } else {
+            setMiswagData([]);
         }
     }, [debouncedSearch]);
 
@@ -63,59 +68,66 @@ function Card() {
         <>
             <div className='m-5 md:mt-20 flex justify-between md:ml-20 md:mr-20'>
                 <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>Products</h1>
-                <SearchBar onChange={setSearch} />
-                {loading && <div>Loading...</div>}
-                {!loading && miswagData.map((item) => (
-                    <div key={item.id}>
-                        <h2>{item.name}</h2>
+                <SearchBar onChange={setSearch} value={search} />
+            </div>
+
+            {search && (
+                <div className='flex justify-center'>
+                    <div className='animate-pulse relative w-60 flex justify-center'>
+                        <img src={searchlogo} alt='searchlogo' className='search-logo w-32' />
+                        <img src={searchcup} alt='searchcup' className='w-56' />
                     </div>
-                ))}
-            </div>
-            <div className='m-5 mt-1 md:ml-20 md:mr-20 flex justify-center'>
-                <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4'>
-                    {miswagData.length > 0 && miswagData.map((data) => (
-                        <div key={data.id} className='bg-amber-100 p-3 h-auto rounded-xl shadow-lg flex flex-col'>
-                            <LazyLoadImage
-                                loading='lazy'
-                                src={data.image}
-                                alt={data.name}
-                                className='object-cover h-32 md:h-48 w-full rounded-xl'
-                                effect='blur'
-                            />
-                            <h1 className='font-bold text-lg mt-2'>{data.name}</h1>
-                            <p className='text-sm md:text-base mt-2 line-clamp-3'>{data.description}</p>
-                            <Stack sx={{ mt: 'auto' }}>
-                                <div className="md:flex md:justify-between items-center pt-4">
-                                    <p className='font-semibold text-sm md:text-lg mb-1 md:mb-0'>{data.price} IQD</p>
-                                    <div className='flex space-x-2'>
-                                        <Link to={`/miswagcoffee/${data.id}/${data.name}`} state={{ data }} style={{ textDecoration: 'none' }}>
-                                            <button className='bg-orange-500 hover:bg-orange-600 w-25 md:w-40 md:h-10 rounded-lg p-2 text-xs md:text-base text-white shadow-md'>
-                                                More Details
-                                            </button>
-                                        </Link>
-                                        <Box
-                                            sx={{
-                                                padding: 1,
-                                                borderRadius: 20,
-                                                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                                                height: { xs: '30px', md: 'auto' },
-                                                width: { xs: '30px', md: 'auto' }
-                                            }}
-                                            onClick={() => toggleFavorite(data.id)}
-                                        >
-                                            {favorites[data.id] ? (
-                                                <FavoriteIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' }, color: 'orange' }} />
-                                            ) : (
-                                                <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' } }} />
-                                            )}
-                                        </Box>
-                                    </div>
-                                </div>
-                            </Stack>
-                        </div>
-                    ))}
                 </div>
-            </div>
+            )}
+
+            {!search  && (
+                <div className='m-5 mt-1 md:ml-20 md:mr-20 flex justify-center'>
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4'>
+                        {miswagData.length > 0 && miswagData.map((data) => (
+                            <div key={data.id} className='bg-amber-100 p-3 h-auto rounded-xl shadow-lg flex flex-col'>
+                                <LazyLoadImage
+                                    loading='lazy'
+                                    src={data.image}
+                                    alt={data.name}
+                                    className='object-cover h-32 md:h-48 w-full rounded-xl'
+                                    effect='blur'
+                                />
+                                <h1 className='font-bold text-lg mt-2'>{data.name}</h1>
+                                <p className='text-sm md:text-base mt-2 line-clamp-3'>{data.description}</p>
+                                <Stack sx={{ mt: 'auto' }}>
+                                    <div className="md:flex md:justify-between items-center pt-4">
+                                        <p className='font-semibold text-sm md:text-lg mb-1 md:mb-0'>{data.price} IQD</p>
+                                        <div className='flex space-x-2'>
+                                            <Link to={`/miswagcoffee/${data.id}/${data.name}`} state={{ data }} style={{ textDecoration: 'none' }}>
+                                                <button className='bg-orange-500 hover:bg-orange-600 w-25 md:w-40 md:h-10 rounded-lg p-2 text-xs md:text-base text-white shadow-md'>
+                                                    More Details
+                                                </button>
+                                            </Link>
+                                            <Box
+                                                sx={{
+                                                    padding: 1,
+                                                    borderRadius: 20,
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                                    height: { xs: '30px', md: 'auto' },
+                                                    width: { xs: '30px', md: 'auto' }
+                                                }}
+                                                onClick={() => toggleFavorite(data.id)}
+                                            >
+                                                {favorites[data.id] ? (
+                                                    <FavoriteIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' }, color: 'orange' }} />
+                                                ) : (
+                                                    <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' } }} />
+                                                )}
+                                            </Box>
+                                        </div>
+                                    </div>
+                                </Stack>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
         </>
     );
 }
