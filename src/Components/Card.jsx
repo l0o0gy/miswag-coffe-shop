@@ -7,27 +7,37 @@ import Box from '@mui/material/Box';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
+import { useDebounce } from '../CustomerHooksuseDebounce/hook';
 
 function Card() {
     const [miswagData, setMiswagData] = useState([]);
     const [favorites, setFavorites] = useState({});
-    const [searchCoffee, setSearchCoffee] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState('');
+    const debouncedSearch = useDebounce(search);
+
+    const fetchCoffeeShopData = async () => {
+        try {
+            const response = await axios.get('https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1727906400000&signature=d6eeTvz4GusjQjL6DqGk5yYSvj2zlXLWR6WsiER6J0E&downloadName=coffee.json');
+            return response.data.data;
+        } catch (err) {
+            console.error("Error fetching data:", err);
+            return [];
+        }
+    };
 
     useEffect(() => {
-        const fetchCoffeeShopData = async () => {
-            try {
-                const response = await axios.get('https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1727906400000&signature=d6eeTvz4GusjQjL6DqGk5yYSvj2zlXLWR6WsiER6J0E&downloadName=coffee.json');
-                setMiswagData(response.data.data);
-
-                const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
-                setFavorites(storedFavorites);
-            } catch (err) {
-                console.error("Error fetching data:", err);
-            }
+        const loadData = async () => {
+            setLoading(true);
+            const data = await fetchCoffeeShopData();
+            setMiswagData(data);
+            const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
+            setFavorites(storedFavorites);
+            setLoading(false);
         };
 
-        fetchCoffeeShopData();
+        loadData();
     }, []);
 
     const toggleFavorite = (id) => {
@@ -36,28 +46,30 @@ function Card() {
         localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     };
 
-    // const handleInputChange = (event) => {
-    //     const value = event.target.value;
-    //     setSearchCoffee(value);
-    //     handleSearch(value);
-    // };
+    useEffect(() => {
+        const loadNameOfItem = async () => {
+            setLoading(true);
+            const data = await fetchCoffeeShopData(debouncedSearch);
+            setMiswagData(data.filter(item => item.name.toLowerCase().includes(debouncedSearch.toLowerCase())));
+            setLoading(false);
+        };
 
-    // const handleSearch = (searchTerm) => {
-    //     if (searchTerm === '') {
-    //         setMiswagData(miswagData);
-    //     } else {
-    //         const filteredData = miswagData.filter(item =>
-    //             item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    //         );
-    //         setMiswagData(filteredData);
-    //     }
-    // };
+        if (debouncedSearch) {
+            loadNameOfItem();
+        }
+    }, [debouncedSearch]);
 
     return (
         <>
             <div className='m-5 md:mt-20 flex justify-between md:ml-20 md:mr-20'>
                 <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>Products</h1>
-                <SearchBar />
+                <SearchBar onChange={setSearch} />
+                {loading && <div>Loading...</div>}
+                {!loading && miswagData.map((item) => (
+                    <div key={item.id}>
+                        <h2>{item.name}</h2>
+                    </div>
+                ))}
             </div>
             <div className='m-5 mt-1 md:ml-20 md:mr-20 flex justify-center'>
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4'>
