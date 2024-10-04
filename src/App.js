@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import NavBar from './Components/NavBar';
 import CoffeDetails from './Pages/CoffeDetails';
-import FavoritesCoffee from './Pages/FavoritesCoffee';
 import Cover from './Components/Cover';
 import { DataProvider } from './assets/contacts/store';
+import Footer from './Components/Footer';
 
 
 function App() {
@@ -24,6 +24,7 @@ function MainContent() {
   const location = useLocation();
 
   const showNavBar = location.pathname !== '/';
+  const showFooter = location.pathname !== '/';
 
   return (
     <>
@@ -32,8 +33,8 @@ function MainContent() {
         <Route path='/' element={<Cover />} />
         <Route path='/home' element={<HomePage />} />
         <Route path='/miswagcoffee/:dataId/:dataName' element={<CoffeDetails />} />
-        <Route path='/favorites' element={<FavoritesCoffee />} />
       </Routes>
+      {showFooter && <Footer />}
     </>
   );
 }
