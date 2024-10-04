@@ -132,7 +132,6 @@ function CoffeeDetails() {
                 open={open}
                 onClose={handleClose}
                 data={data}
-                id={data.id}
                 name={data.name}
                 selectedCup={selectedCup}
                 coffeeCount={coffeeCount}
