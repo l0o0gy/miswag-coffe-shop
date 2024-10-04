@@ -4,7 +4,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
 import CoffeeImage from './CoffeeImage';
 
 function CardData() {
@@ -21,6 +20,14 @@ function CardData() {
         }
     };
 
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; 
+        }
+        return array;
+    };
+
     useEffect(() => {
         const loadFavorites = () => {
             const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
@@ -29,7 +36,9 @@ function CardData() {
 
         const loadData = async () => {
             const data = await fetchCoffeeShopData();
-            setMiswagData(data);
+            const shuffledData = shuffleArray(data); 
+            const limitedData = shuffledData.slice(0, 10);
+            setMiswagData(limitedData);
         };
 
         loadFavorites();
@@ -43,8 +52,8 @@ function CardData() {
     };
 
     return (
-        <div className="m-5 ml-0 mt-1 md:m-1 flex justify-center">
-            <div className="flex overflow-x-auto gap-2  md:h-auto ">
+        <div className="m-5 ml-0 mt-0 md:m-1 flex justify-center">
+            <div className="flex overflow-x-auto gap-2 md:h-auto">
                 {miswagData.map((data) => (
                     <div key={data.id} className="bg-amber-100 p-3 w-32 md:w-36 h-48 md:h-64 rounded-xl shadow-lg flex flex-col">
                         <Box
@@ -57,27 +66,27 @@ function CardData() {
                         >
                             <CoffeeImage id={data.id} />
                         </Box>
-                        <h1 className="font-bold text-base ">{data.name}</h1>
+                        <h1 className="font-bold text-base">{data.name}</h1>
                         <p className="text-sm md:text-sm line-clamp-3 h-10">{data.description}</p>
                         <Stack sx={{ mt: 'auto' }}>
-                            <div className="flex justify-between items-center ">
+                            <div className="flex justify-between items-center">
                                 <p className="font-semibold text-sm md:text-lg mb-1 md:mb-0">{data.price} IQD</p>
-                                    <Box
-                                        sx={{
-                                            padding: 1,
-                                            borderRadius: 20,
-                                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                                            height:'30px',
-                                            width: '30px',
-                                        }}
-                                        onClick={() => toggleFavorite(data.id)}
-                                    >
-                                        {favorites[data.id] ? (
-                                            <FavoriteIcon sx={{ marginTop: { xs: '-10px', md: '-11px' }, marginLeft: { xs: '-5px', md: '-5px' }, color: 'orange' }} />
-                                        ) : (
-                                            <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px', md: '-11px' }, marginLeft: { xs: '-5px', md: '-5px' } }} />
-                                        )}
-                                    </Box>
+                                <Box
+                                    sx={{
+                                        padding: 1,
+                                        borderRadius: 20,
+                                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                        height: '30px',
+                                        width: '30px',
+                                    }}
+                                    onClick={() => toggleFavorite(data.id)}
+                                >
+                                    {favorites[data.id] ? (
+                                        <FavoriteIcon sx={{ marginTop: { xs: '-10px', md: '-11px' }, marginLeft: { xs: '-5px', md: '-5px' }, color: 'orange' }} />
+                                    ) : (
+                                        <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px', md: '-11px' }, marginLeft: { xs: '-5px', md: '-5px' } }} />
+                                    )}
+                                </Box>
                             </div>
                         </Stack>
                     </div>
