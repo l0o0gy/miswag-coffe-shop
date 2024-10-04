@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 function NavBar() {
     const navItems = [
-        { title: 'Store',path:'/home'},
-        { title: 'Favorite', path: '/favorites' },
+        { title: 'Store', path: '/home' },
+        { title: 'Favorite' },
         { title: 'Blog' },
-        { title: 'About' } 
+        { title: 'About' }
     ];
 
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ function NavBar() {
     };
 
     return (
-        <nav className="flex items-center md:justify-between p-2 relative">
+        <nav className="flex items-center md:justify-between p-2  bg-white shadow-md fixed top-0 left-0 right-0 z-10">
             <div className='md:hidden'>
                 <div onClick={openDrawer(true)} className='hover:bg-slate-100 hover:rounded-full p-2'>
                     <MenuIcon />

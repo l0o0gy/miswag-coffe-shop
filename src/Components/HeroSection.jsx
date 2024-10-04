@@ -4,8 +4,8 @@ import video from '../assets/img/coffee.mp4';
 function HeroSection() {
     return (
         <div className="relative">
-            <div 
-                className='object-cover  ml-5 mr-5 h-40 rounded-xl md:h-80 md:ml-20 md:mr-20 flex overflow-hidden items-center relative '
+            <div
+                className='object-cover  mt-20  md:m-20 ml-5 mr-5 h-40 rounded-xl md:h-80  flex overflow-hidden items-center relative  '
             >
                 <video
                     src={video}

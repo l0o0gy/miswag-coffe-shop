@@ -55,16 +55,19 @@ function CoffeeDetails() {
 
     return (
         <div className='mb-3 md:mb-10'>
-            <div className="md:flex md:justify-start m-5 mt-0 md:p-5 md:mt-0 md:m-16">
+            <div className="md:flex md:justify-start m-5 mt-20 md:p-5  md:m-16">
+                <div className="object-cover rounded-lg  md:w-6/12 md:h-96">
                 <Box sx={{ height: { xs: '250px', md: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
-                    <CoffeeImage id={data.id} />
-                </Box>
+                    <CoffeeImage id={data.id}
+                    />
+                </Box> 
+                </div>
 
-                <div className="md:pl-10 pt-5 md:pt-0">
+                <div className="md:pl-10 pt-0 md:pt-0">
                     <h1 className='font-bold text-2xl md:text-5xl text-amber-900'>{data.name}</h1>
                     <p className='text-sm md:text-xl line-clamp-3 text-amber-700 text-opacity-80 pt-1 md:pt-5'> Description :</p>
                     <p className='text-sm md:text-xl line-clamp-3 text-amber-700 text-opacity-50 pt-1 md:pt-1'>{data.description}</p>
-                    <p className='text-sm md:text-xl line-clamp-3 text-current pt-1 text-opacity-50 md:pt-3'>Choose your Fav cup size :</p>
+                    <p className='text-sm md:text-xl line-clamp-3 text-current pt-1 text-opacity-35 md:pt-3'>Please Click on Cup to Choose:</p>
 
                     <div className="flex md:justify-center items-center mt-2 md:mt-2 space-x-4">
                         {['s', 'm', 'l'].map((size) => (
@@ -115,9 +118,9 @@ function CoffeeDetails() {
 
             </div>
             <div className='m-5 md:mt-20 flex justify-start md:ml-20 md:mr-20'>
-                <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>You May Like</h1>
+                <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>You May Like</h1> 
             </div>
-            <div className='ml-5 mr-5 h-52 md:h-80 md:ml-20 md:mr-20 flex items-center relative overflow-x-scroll'>
+            <div className='ml-5 mr-5 h-56 md:h-80 md:ml-20 md:mr-20 flex items-center relative overflow-x-scroll overflow-y-hidden'>
                 <div className='flex space-x-4 mt-4 md:mt-1'>
                     <CardData />
                 </div>
