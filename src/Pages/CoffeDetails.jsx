@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import emptycup from '../assets/img/coffee (1).png';
 import fullcup from '../assets/img/coffee.png';
+import CoffeeImage from '../Components/CoffeeImage'
+import { Box } from '@mui/material';  
+
 
 function CoffeeDetails() {
     const location = useLocation();
@@ -39,12 +42,13 @@ function CoffeeDetails() {
 
     return (
         <div className="md:flex md:justify-start m-5 mt-0 md:p-5 md:mt-0 md:m-16">
-            <img
-                src={data.image}
-                alt={data.name}
-                loading="lazy"
-                className="object-cover rounded-lg w-full h-72 md:w-6/12 md:h-96 bg-slate-500"
-            />
+        <Box sx={{ height: { xs: '100px', md: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
+        <CoffeeImage id={data.id}/>                 
+ 
+            </Box>
+            {/* className="object-cover rounded-lg w-full h-72 md:w-6/12 md:h-96 bg-slate-500"
+            /> */}
+
             <div className="md:pl-10 pt-5 md:pt-0">
                 <h1 className='font-bold text-2xl md:text-5xl text-amber-900'>{data.name}</h1>
                 <p className='text-sm md:text-xl  line-clamp-3 text-amber-700 text-opacity-80 pt-1 md:pt-5'> Description :</p>
