@@ -22,11 +22,11 @@ function CoffeeDetails() {
     const getCupWidth = (size) => {
         switch (size) {
             case 's':
-                return 'h-14 md:h-20';
+                return 'h-14 lg:h-20';
             case 'm':
-                return 'h-16 md:h-24';
+                return 'h-16 lg:h-24';
             case 'l':
-                return 'h-20 md:h-28';
+                return 'h-20 lg:h-28';
             default:
                 return 'w-10';
         }
@@ -65,18 +65,19 @@ function CoffeeDetails() {
 
     return (
         <div className='mb-3 md:mb-10'>
-            <div className="md:flex md:justify-start m-5 mt-20 md:p-5  md:m-16">
-                <div className="object-cover rounded-lg  md:w-6/12 md:h-96">
-                    <Box sx={{ height: { xs: '250px', md: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
+            <div className="md:flex md:justify-start m-5 mt-20 md:p-5  md:m-16 ">
+                <div className="object-cover rounded-lg  lg:w-6/12 md:h-96">
+                    <Box sx={{ height: { xs: '250px',sm:'350px', lg: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
                         <CoffeeImage id={data.id} />
                     </Box>
                 </div>
 
-                <div className="md:pl-10 pt-0 md:pt-0">
-                    <h1 className='font-bold text-2xl md:text-5xl text-amber-900'>{data.name}</h1>
-                    <p className='text-sm md:text-xl line-clamp-3 text-amber-700 text-opacity-80 pt-1 md:pt-5'> Description :</p>
-                    <p className='text-sm md:text-xl line-clamp-3 text-amber-700 text-opacity-50 pt-1 md:pt-1'>{data.description}</p>
-                    <p className='text-sm md:text-xl line-clamp-3 text-current pt-1 text-opacity-35 md:pt-3'>Please Click on Cup to Choose:</p>
+                <div className="md:pl-10 pt-0 md:pt-0 "
+                >
+                    <h1 className='font-bold text-2xl md:text-4xl lg:text-5xl text-amber-900 sm:pt-3'>{data.name}</h1>
+                    <p className='text-sm md:text-xl line-clamp-3 text-amber-700 text-opacity-80 pt-1  md:pt-5'> Description :</p>
+                    <p className='text-sm sm:text-lg md:text-xl line-clamp-3 text-amber-700 text-opacity-50 pt-1 md:pt-1'>{data.description}</p>
+                    <p className='text-sm sm:text-lg md:text-xl line-clamp-3 text-current pt-1 text-opacity-35 md:pt-3'>Please Click on Cup to Choose:</p>
 
                     <div className="flex md:justify-center items-center mt-2 md:mt-2 space-x-4">
                         {['s', 'm', 'l'].map((size) => (
@@ -94,7 +95,7 @@ function CoffeeDetails() {
 
                     {selectedCup && (
                         <>
-                            <div className="flex items-center mt-1">
+                            <div className="flex items-center mt-1 w-full">
                                 <button
                                     onClick={decrementCount}
                                     className="bg-orange-500 hover:bg-orange-500 rounded-md w-7 h-7 text-2xl flex justify-center items-center"

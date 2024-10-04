@@ -27,7 +27,7 @@ function MainContent() {
   const showFooter = location.pathname !== '/';
 
   return (
-    <>
+    <div>
       {showNavBar && <NavBar />}
       <Routes>
         <Route path='/' element={<Cover />} />
@@ -35,7 +35,7 @@ function MainContent() {
         <Route path='/miswagcoffee/:dataId/:dataName' element={<CoffeDetails />} />
       </Routes>
       {showFooter && <Footer />}
-    </>
+    </div>
   );
 }
 

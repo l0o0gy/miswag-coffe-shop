@@ -98,12 +98,12 @@ function Card() {
 
             {!loading && (
                 <div className='m-5 mt-1 md:ml-20 md:mr-20 flex justify-center'>
-                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4'>
                         {miswagData.length > 0 && miswagData.map((data) => (
                             <div key={data.id} className='bg-amber-100 p-3 h-auto rounded-xl shadow-lg flex flex-col'>
                                 <Box
                                     sx={{
-                                        height: { xs: '100px', md: '300px' },
+                                        height: { xs: '100px',sm:'200px',md:'150px' ,lg: '300px' },
                                         maxWidth: '500px',
                                         overflow: 'hidden',
                                         borderRadius: 2,
@@ -114,11 +114,11 @@ function Card() {
                                 <h1 className='font-bold text-lg mt-2'>{data.name}</h1>
                                 <p className='text-sm md:text-base mt-2 line-clamp-3'>{data.description}</p>
                                 <Stack sx={{ mt: 'auto' }}>
-                                    <div className="md:flex md:justify-between items-center pt-4">
-                                        <p className='font-semibold text-sm md:text-lg mb-1 md:mb-0'>{data.price} IQD</p>
+                                    <div className="flex justify-between items-center pt-4 no-flex-xxxs">
+                                        <p className='font-semibold text-sm sm:text-base lg:text-lg mb-1 md:mb-0'>{data.price} IQD</p>
                                         <div className='flex space-x-2'>
                                             <Link to={`/miswagcoffee/${data.id}/${data.name}`} state={{ data }} style={{ textDecoration: 'none' }}>
-                                                <button className='bg-orange-500 hover:bg-orange-600 w-25 md:w-40 md:h-10 rounded-lg p-2 text-xs md:text-base text-white shadow-md'>
+                                                <button className='bg-orange-500 hover:bg-orange-600 max-w-full sm:w-32 md:w-24 lg:w-40 md:h-10 rounded-lg p-2 text-xs sm:text-base md:text-sm lg:text-base text-white shadow-md'>
                                                     More Details
                                                 </button>
                                             </Link>
@@ -127,15 +127,15 @@ function Card() {
                                                     padding: 1,
                                                     borderRadius: 20,
                                                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                                                    height: { xs: '30px', md: 'auto' },
-                                                    width: { xs: '30px', md: 'auto' }
+                                                    height: { xs: '30px',sm:'40px', md: '40px', lg:'auto'},
+                                                    width: { xs: '30px',sm:'40px', md:'40px' , lg:'auto'}
                                                 }}
                                                 onClick={() => toggleFavorite(data.id)}
                                             >
                                                 {favorites[data.id] ? (
-                                                    <FavoriteIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' }, color: 'orange' }} />
+                                                    <FavoriteIcon sx={{ marginTop: { xs: '-10px',sm:'-2px', lg: 'auto' }, marginLeft: { xs: '-5px',sm:'-1px', lg: 'auto' }, color: 'orange' }} />
                                                 ) : (
-                                                    <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px', md: 'auto' }, marginLeft: { xs: '-5px', md: 'auto' } }} />
+                                                    <FavoriteBorderIcon sx={{ marginTop: { xs: '-10px',sm:'-2px', lg: 'auto' }, marginLeft: { xs: '-5px',sm:'-1px', lg: 'auto' } }} />
                                                 )}
                                             </Box>
                                         </div>

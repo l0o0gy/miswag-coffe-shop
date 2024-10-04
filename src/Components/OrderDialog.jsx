@@ -78,7 +78,7 @@ export default function FormDialog({ open, onClose, selectedCup, coffeeCount, co
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={onClose}>Cancel</Button>
-                            <Button type="submit">Order Now</Button>
+                            <Button onClick={handleSubmit}>Order Now</Button>
                         </DialogActions>
                     </>
                 )}

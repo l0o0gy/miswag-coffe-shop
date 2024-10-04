@@ -50,3 +50,11 @@
     transform: translateY(8px) translateX(0px);
   }
 }
+
+@media (max-width: 463px) {
+  .no-flex-xxxs {
+    display: block;
+    justify-content: unset;
+    align-items: unset;
+  }
+}
