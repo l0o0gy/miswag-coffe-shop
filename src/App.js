@@ -5,12 +5,16 @@ import NavBar from './Components/NavBar';
 import CoffeDetails from './Pages/CoffeDetails';
 import FavoritesCoffee from './Pages/FavoritesCoffee';
 import Cover from './Components/Cover';
+import { DataProvider } from './assets/contacts/store';
+
 
 function App() {
   return (
     <div className="font-sans">
       <BrowserRouter>
-        <MainContent />
+        <DataProvider>
+          <MainContent />
+        </DataProvider>
       </BrowserRouter>
     </div>
   );
