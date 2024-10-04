@@ -1,7 +1,7 @@
 import React from 'react';
 import { useData } from '../assets/contacts/store';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Box } from '@mui/material';  
+// import { Box } from '@mui/material';  
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 function CoffeeImage({ id }) {

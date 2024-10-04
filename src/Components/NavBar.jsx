@@ -18,7 +18,7 @@ function NavBar() {
     };
 
     return (
-        <nav className="flex items-center md:justify-between p-2">
+        <nav className="flex items-center md:justify-between p-2 relative">
             <div className='md:hidden'>
                 <div onClick={openDrawer(true)} className='hover:bg-slate-100 hover:rounded-full p-2'>
                     <MenuIcon />
