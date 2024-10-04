@@ -5,12 +5,14 @@ import fullcup from '../assets/img/coffee.png';
 import CoffeeImage from '../Components/CoffeeImage';
 import { Box } from '@mui/material';
 import CardData from '../Components/CardData';
+import FormDialog from '../Components/OrderDialog';
 
 function CoffeeDetails() {
     const location = useLocation();
     const { data } = location.state || {};
     const [selectedCup, setSelectedCup] = useState(null);
     const [coffeeCount, setCoffeeCount] = useState(1);
+    const [open, setOpen] = useState(false);
 
     const handleCupClick = (size) => {
         setSelectedCup(size);
@@ -53,14 +55,21 @@ function CoffeeDetails() {
         return basePrice;
     };
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div className='mb-3 md:mb-10'>
             <div className="md:flex md:justify-start m-5 mt-20 md:p-5  md:m-16">
                 <div className="object-cover rounded-lg  md:w-6/12 md:h-96">
-                <Box sx={{ height: { xs: '250px', md: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
-                    <CoffeeImage id={data.id}
-                    />
-                </Box> 
+                    <Box sx={{ height: { xs: '250px', md: '400px' }, maxWidth: '600px', overflow: 'hidden', borderRadius: 2 }}>
+                        <CoffeeImage id={data.id} />
+                    </Box>
                 </div>
 
                 <div className="md:pl-10 pt-0 md:pt-0">
@@ -108,17 +117,29 @@ function CoffeeDetails() {
                             </div>
 
                             <div className='relative w-full'>
-                                <button className='bg-orange-500 hover:bg-orange-600 absolute bottom-0 right-0 rounded-lg p-2 text-white shadow-md'>
+                                <button
+                                    onClick={handleClickOpen}
+                                    className='bg-orange-500 hover:bg-orange-600 absolute bottom-0 right-0 rounded-lg p-2 text-white shadow-md'>
                                     Order Online
                                 </button>
                             </div>
                         </>
                     )}
                 </div>
-
             </div>
+
+            <FormDialog
+                open={open}
+                onClose={handleClose}
+                data={data}
+                id={data.id}
+                name={data.name}
+                selectedCup={selectedCup}
+                coffeeCount={coffeeCount}
+                coffeePrice={coffeePrice()}
+            />
             <div className='m-5 md:mt-20 flex justify-start md:ml-20 md:mr-20'>
-                <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>You May Like</h1> 
+                <h1 className='font-bold md:text-2xl mt-2 text-amber-800'>You May Like</h1>
             </div>
             <div className='ml-5 mr-5 h-56 md:h-80 md:ml-20 md:mr-20 flex items-center relative overflow-x-scroll overflow-y-hidden'>
                 <div className='flex space-x-4 mt-4 md:mt-1'>

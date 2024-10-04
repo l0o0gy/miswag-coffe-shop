@@ -11,7 +11,7 @@ export default function SearchBar({ value, onChange }) {
                     placeholder='Search...'
                     value={value}
                     onChange={(e) => onChange(e.target.value)} 
-                    className='outline-none w-36'
+                    className='outline-none w-28 md:w-36 '
                 />
             </div>
         </div>

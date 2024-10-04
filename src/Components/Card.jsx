@@ -89,9 +89,9 @@ function Card() {
 
             {loading && (
                 <div className='flex justify-center m-20'>
-                    <div className='animate-pulse relative w-60 flex justify-center'>
-                        <img src={searchlogo} alt='searchlogo' className='search-logo w-32' />
-                        <img src={searchcup} alt='searchcup' className='w-56' />
+                    <div className='animate-pulse relative md:w-60 flex justify-center'>
+                        <img src={searchlogo} alt='searchlogo' className='search-logo w-16 md:w-32' />
+                        <img src={searchcup} alt='searchcup' className=' w-32 md:w-56' />
                     </div>
                 </div>
             )}
