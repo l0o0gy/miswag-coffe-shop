@@ -12,7 +12,7 @@ function CardData() {
 
     const fetchCoffeeShopData = async () => {
         try {
-            const response = await axios.get('https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1728115200000&signature=popitFuaZ_CCnoodfqWYvaCYIHQDJgIj376SZPqDRas&downloadName=coffee.json');
+            const response = await axios.get('https://file.notion.so/f/f/f9a09310-af94-4993-bbca-d051d7b65e1d/2dd59431-7382-4f93-9625-fece6ad64e7d/coffee.json?table=block&id=1118d471-7c66-80c3-81e4-d43d01799cc0&spaceId=f9a09310-af94-4993-bbca-d051d7b65e1d&expirationTimestamp=1728388800000&signature=diIMeam0_MlmAMds3_wsErp_NsQ7HOdyJvARuf-If88&downloadName=coffee.json');
             return response.data.data;
         } catch (err) {
             console.error("Error fetching data:", err);
