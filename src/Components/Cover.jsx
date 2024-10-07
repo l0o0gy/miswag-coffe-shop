@@ -3,6 +3,9 @@ import cover from '../assets/img/homecover.jpg';
 import logo from '../assets/img/whitelogo.png';
 import smoke from '../assets/img/giphy.gif';
 import { useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 
 
 function Cover() {
@@ -22,15 +25,18 @@ function Cover() {
             style={{ backgroundImage: `url(${cover})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="flex flex-col items-center justify-center h-screen pb-30 md:pb-0  bg-orange-950 ">
-                <img
+
+                <LazyLoadImage
                     src={smoke}
                     alt='Smoke Animation'
-                    className='w-20  md:w-32 '
+                    className='w-16  md:w-32 '
+
+                    effect='blur'
                 />
-                <img
+                <LazyLoadImage
                     src={logo}
                     alt='Miswag Logo'
-                    className='md:max-w-[800px] '
+                    className=' w-40 md:max-w-[800px] '
                 />
             </div>
         </div>
